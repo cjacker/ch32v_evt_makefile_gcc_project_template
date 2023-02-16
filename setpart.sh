@@ -24,7 +24,8 @@ fi
 PART=$1
 FLASHSIZE=
 RAMSIZE=
-STARTUP_ASM=                                                                            ZIPFILE=
+STARTUP_ASM=
+ZIPFILE=
 
 FOUND="f"
 
@@ -56,6 +57,7 @@ setpart()
     sed "s/FLASH_SIZE/$FLASHSIZE/g" Link.ld.template.$PART_FAMILY > CH32V_firmware_library/Ld/Link.ld
     sed -i "s/RAM_SIZE/$RAMSIZE/g" CH32V_firmware_library/Ld/Link.ld
     sed -i "s/^CH32V_firmware_library\/Startup\/startup.*/CH32V_firmware_library\/Startup\/$STARTUP_ASM/g" Makefile
+    sed -i "s/CH32VXXX/$PART/g" Makefile
   else
     echo "Not $PART_FAMILY project, can not set part to $PART"
     exit
