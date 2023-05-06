@@ -57,7 +57,7 @@ rm -rf CH32V_firmware_library Examples
 
 echo "Extract EVT package"
 mkdir -p evt_tmp
-unzip -q -O gb18030 $ZIPFILE -d evt_tmp
+unzip -q $ZIPFILE -d evt_tmp
 
 # prepare dir structure
 mkdir -p CH32V_firmware_library
@@ -93,24 +93,24 @@ else
 fi
 
 # generate the Linker script
-sed "s/FLASH_SIZE/$FLASHSIZE/g" $LD_TEMPLATE > CH32V_firmware_library/Ld/Link.ld
-sed -i "s/RAM_SIZE/$RAMSIZE/g" CH32V_firmware_library/Ld/Link.ld
+sed -e "s/FLASH_SIZE/$FLASHSIZE/g" $LD_TEMPLATE > CH32V_firmware_library/Ld/Link.ld
+sed -i -e "s/RAM_SIZE/$RAMSIZE/g" CH32V_firmware_library/Ld/Link.ld
 
 echo "Generate Makefile"
 # collect c files and asm files
-find . -path ./Examples -prune -o -type f -name "*.c"|sed 's@^\./@@g;s@$@ \\@g' > c_source.list
+find . -path ./Examples -prune -o -type f -name "*.c"|sed -e 's@^\./@@g;s@$@ \\@g' > c_source.list
 # drop Examples line in source list.
-sed -i "/^Examples/d" c_source.list
+sed -i -e "/^Examples/d" c_source.list
 
-sed "s/C_SOURCE_LIST/$(sed -e 's/[\&/]/\\&/g' -e 's/$/\\n/' c_source.list | tr -d '\n')/" Makefile.ch32vtemplate >Makefile
-sed -i "s/STARTUP_ASM_SOURCE_LIST/CH32V_firmware_library\/Startup\/$STARTUP_ASM/" Makefile
+sed -e "s/C_SOURCE_LIST/$(sed -e 's/[\&/]/\\&/g' -e 's/$/\\n/' c_source.list | tr -d '\n')/" Makefile.ch32vtemplate >Makefile
+sed -i -e "s/STARTUP_ASM_SOURCE_LIST/CH32V_firmware_library\/Startup\/$STARTUP_ASM/" Makefile
 
 rm -f c_source.list
 
 if [[ $PART = ch32v0* ]]; then
- sed -i "s/CPU = -march=rv32imac -mabi=ilp32/CPU = -march=rv32ec -mabi=ilp32e/g" Makefile
+ sed -i -e "s/CPU = -march=rv32imac -mabi=ilp32/CPU = -march=rv32ec -mabi=ilp32e/g" Makefile
 fi
-sed -i "s/CH32VXXX/$PART/g" Makefile
+sed -i -e "s/CH32VXXX/$PART/g" Makefile
 
 echo "#########################"
 echo "Done, project generated, type 'make' to build"
