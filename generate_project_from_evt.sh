@@ -108,6 +108,7 @@ sed -i "s/STARTUP_ASM_SOURCE_LIST/CH32V_firmware_library\/Startup\/$STARTUP_ASM/
 rm -f c_source.list
 
 if [[ $PART = ch32v0* ]]; then
+ sed -i "s/CPU = -march=rv32imac_zicsr -mabi=ilp32/CPU = -march=rv32ec_zicsr -mabi=ilp32e/g" Makefile
  sed -i "s/CPU = -march=rv32imac -mabi=ilp32/CPU = -march=rv32ec -mabi=ilp32e/g" Makefile
 fi
 sed -i "s/CH32VXXX/$PART/g" Makefile
