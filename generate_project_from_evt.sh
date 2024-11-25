@@ -53,7 +53,7 @@ echo "#########################"
 rm -rf evt_tmp
 # remove all sources, copy from EVT later
 # do not remove User dir.
-rm -rf CH32V_firmware_library Examples
+rm -rf CH32V_firmware_library CH32X_firmware_library Examples
 
 echo "Extract EVT package"
 mkdir -p evt_tmp
@@ -109,11 +109,19 @@ sed -i "s/STARTUP_ASM_SOURCE_LIST/CH32V_firmware_library\/Startup\/$STARTUP_ASM/
 
 rm -f c_source.list
 
+# special treatment for ch32v003
 if [[ $PART = ch32v0* ]]; then
  sed -i "s/CPU = -march=rv32imac_zicsr -mabi=ilp32/CPU = -march=rv32ec_zicsr -mabi=ilp32e/g" Makefile
  sed -i "s/CPU = -march=rv32imac -mabi=ilp32/CPU = -march=rv32ec -mabi=ilp32e/g" Makefile
 fi
 sed -i "s/CH32VXXX/$PART/g" Makefile
+
+# special treatment for ch32x035
+if [[ $PART = ch32x*  ]]; then
+  mv CH32V_firmware_library CH32X_firmware_library
+  sed -i "s/CH32V/CH32X/g" Makefile
+fi
+
 
 echo "#########################"
 echo "Done, project generated, type 'make' to build"
