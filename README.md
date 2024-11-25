@@ -4,17 +4,17 @@ This is a project template with related tools to convert WCH official CH32V EVT 
 
 This template will convert the EVT package to a Makefile project and setup Link.ld according to your MCU, it support All CH32V EVT packages from WCH, include:
 
-- CH32V003EVT.ZIP
+- [CH32V003EVT.ZIP](https://www.wch.cn/downloads/CH32V003EVT_ZIP.html) V2.0 2024-10-28
   + CH32V003J4M6
   + CH32V003A4M6
   + CH32V003F4U6
   + CH32V003F4P6
-- CH32V103EVT.ZIP
+- [CH32V103EVT.ZIP](https://www.wch.cn/downloads/CH32V103EVT_ZIP.html) V2.6 2024-06-27
   + CH32V103C6T6
   + CH32V103C8U6
   + CH32V103C8T6
   + CH32V103R8T6
-- CH32V20xEVT.ZIP
+- [CH32V20xEVT.ZIP](https://www.wch.cn/downloads/CH32V20xEVT_ZIP.html) V2.2 2024-11-08
   + CH32V203F6P6
   + CH32V203G6U6
   + CH32V203K6T6
@@ -30,7 +30,7 @@ This template will convert the EVT package to a Makefile project and setup Link.
   + CH32V208CBU6
   + CH32V208RBT6
   + CH32V208WBU6
-- CH32V307EVT.ZIP
+- [CH32V307EVT.ZIP](https://www.wch.cn/downloads/CH32V307EVT_ZIP.html) V2.7 2024-11-08
   + CH32V303CBT6
   + CH32V303RBT6
   + CH32V303RCT6
