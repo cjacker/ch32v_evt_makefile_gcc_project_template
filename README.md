@@ -9,6 +9,14 @@ This template will convert the EVT package to a Makefile project and setup Link.
   + CH32V003A4M6
   + CH32V003F4U6
   + CH32V003F4P6
+- [CH32X035EVT.ZIP](https://www.wch.cn/downloads/CH32X035EVT_ZIP.html) V1.8 2024-11-07
+  + CH32X035R8T6
+  + CH32X035C8T6
+  + CH32X035G8U6
+  + CH32X035G8R6
+  + CH32X035F8U6
+  + CH32X035F7P6
+  + CH32X033F8P6
 - [CH32V103EVT.ZIP](https://www.wch.cn/downloads/CH32V103EVT_ZIP.html) V2.6 2024-06-27
   + CH32V103C6T6
   + CH32V103C8U6

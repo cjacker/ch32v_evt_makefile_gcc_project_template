@@ -15,7 +15,7 @@ if [ $# -ne 1 ]; then
 fi
 
 # iterate the part list to found part info.
-PART=$1
+PART=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 FLASHSIZE=
 RAMSIZE=
 STARTUP_ASM=
@@ -87,6 +87,8 @@ elif [[ $PART = ch32v1* ]]; then
   LD_TEMPLATE=Link.ld.template.ch32v1
 elif [[ $PART = ch32v0* ]]; then
   LD_TEMPLATE=Link.ld.template.ch32v0
+elif [[ $PART = ch32x0* ]]; then
+  LD_TEMPLATE=Link.ld.template.ch32x0
 else
   echo "Part $part is not supported"
   exit
