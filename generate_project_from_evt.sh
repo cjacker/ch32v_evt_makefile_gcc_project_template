@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PART_LIST="./ch32v-parts-list.txt"
+PART_LIST="./parts-list.txt"
 
 # if no arg,
 if [ $# -ne 1 ]; then
@@ -89,6 +89,8 @@ elif [[ $PART = ch32v0* ]]; then
   LD_TEMPLATE=Link.ld.template.ch32v0
 elif [[ $PART = ch32x0* ]]; then
   LD_TEMPLATE=Link.ld.template.ch32x0
+elif [[ $PART = ch32l1* ]]; then
+  LD_TEMPLATE=Link.ld.template.ch32l1
 else
   echo "Part $part is not supported"
   exit
@@ -120,6 +122,12 @@ sed -i "s/CH32VXXX/$PART/g" Makefile
 if [[ $PART = ch32x*  ]]; then
   mv CH32V_firmware_library CH32X_firmware_library
   sed -i "s/CH32V/CH32X/g" Makefile
+fi
+
+# special treatment for ch32l103
+if [[ $PART = ch32l*  ]]; then
+  mv CH32V_firmware_library CH32L_firmware_library
+  sed -i "s/CH32V/CH32L/g" Makefile
 fi
 
 

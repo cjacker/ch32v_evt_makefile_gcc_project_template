@@ -6,7 +6,7 @@ if [ ! -f Makefile ]; then
   exit
 fi 
 
-PART_LIST="./ch32v-parts-list.txt"
+PART_LIST="./parts-list.txt"
 
 # if no arg,
 if [ $# -ne 1 ]; then
@@ -75,6 +75,17 @@ setpart()
       echo "Not $PART_FAMILY project, can not set part to $PART"
       exit
     fi
+  elif [[ $PART_FAMILY = ch32l* ]]; then
+    if [ -f ./CH32L_firmware_library/Peripheral/inc/$PART_FAMILY"03.h" ]; then
+      sed -i "s/^TARGET = .*/TARGET = $PART/g" Makefile
+      # generate the Linker script
+      sed "s/FLASH_SIZE/$FLASHSIZE/g" Link.ld.template.$PART_FAMILY > CH32L_firmware_library/Ld/Link.ld
+      sed -i "s/RAM_SIZE/$RAMSIZE/g" CH32L_firmware_library/Ld/Link.ld
+      sed -i "s/^CH32L_firmware_library\/Startup\/startup.*/CH32L_firmware_library\/Startup\/$STARTUP_ASM/g" Makefile
+    else
+      echo "Not $PART_FAMILY project, can not set part to $PART"
+      exit
+    fi
   fi
 }
 
@@ -103,5 +114,9 @@ fi
 
 if [[ $PART = ch32x0*  ]]; then
   setpart ch32x0
+fi
+
+if [[ $PART = ch32l1*  ]]; then
+  setpart ch32l1
 fi
 
