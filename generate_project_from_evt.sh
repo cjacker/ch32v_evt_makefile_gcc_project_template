@@ -53,7 +53,7 @@ echo "#########################"
 rm -rf evt_tmp
 # remove all sources, copy from EVT later
 # do not remove User dir.
-rm -rf CH32V_firmware_library CH32X_firmware_library Examples
+rm -rf CH32V_firmware_library CH32X_firmware_library CH32L_firmware_library Examples
 
 echo "Extract EVT package"
 mkdir -p evt_tmp
